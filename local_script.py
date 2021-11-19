@@ -2,8 +2,6 @@ import csv
 import os
 import fnmatch
 
-SourcePath = '/mnt/landing/ptcl/edw/edwdev/tnl/jobs/Group_BTEQSLJM/FilestoUpload/datafiles/'
-TargetPath = '/mnt/landing/ptcl/edw/edwdev/tnl/jobs/Group_BTEQSLJM/TgtFiles/proc/'
 #defined functions
 def output_csv(filepath,filename):
     count = 0
@@ -17,7 +15,7 @@ def output_csv(filepath,filename):
                         # print(f'Column names are {line}')
                         count += 1
                     else:
-                        with open(TargetPath + 'collected_HOST03.txt','a',newline='') as merged:
+                        with open('./CollectedData/collected_HOST03.txt','a',newline='') as merged:
                             writerobj = csv.writer(merged)
                             writerobj.writerow(line)
                             merged.close()
@@ -31,7 +29,7 @@ def output_csv(filepath,filename):
                     if counter == 0:
                         counter += 1
                     else:
-                        with open(TargetPath + 'collected_History.txt','a',newline='') as merged2:
+                        with open('./CollectedData/collected_History.txt','a',newline='') as merged2:
                             writerobj2 = csv.writer(merged2)
                             writerobj2.writerow(newline)
                             merged2.close()
@@ -53,51 +51,23 @@ def get_csv(csvdir):
             csvlist2.append(filename)
     return csvlist,csvlist2
 
-# def get_csv_History(csvdir):
-#     csvlist = []
-#     for filename in csvdir:
-#         if fnmatch.fnmatch(filename,'History*'+'FTRMTR*'+'Counters*'+'*.csv'):
-#             csvlist.append(filename)
-#     return csvlist
 
 #main code
-if os.path.isfile(TargetPath + 'collected_History.txt'):
-    os.remove(TargetPath + 'collected_History.txt')
-if os.path.isfile(TargetPath + 'collected_HOST03.txt'):
-    os.remove(TargetPath + 'collected_HOST03.txt')
+if os.path.isfile('./CollectedData/' + 'collected_History.txt'):
+    os.remove('./CollectedData/' + 'collected_History.txt')
+if os.path.isfile('./CollectedData/' + 'collected_HOST03.txt'):
+    os.remove('./CollectedData/' + 'collected_HOST03.txt')
 
-csv_filedir = os.listdir(SourcePath)
+csv_filedir = os.listdir("./datafiles")
 
 csv_lst1,csv_lst2 = get_csv(csv_filedir)
 
 if csv_lst1:
     for filename in csv_lst1:
         print(filename)
-        output_csv(SourcePath + filename,filename)
+        output_csv('./datafiles/'+ filename,filename)
 
 if csv_lst2:
     for filename in csv_lst2:
         print(filename)
-        output_csv(SourcePath + filename,filename)
-
-# for file in get_csv_HOST03(csv_filedir):
-#     print(file)
-#     output_csv('./datafiles/' + file)
-
-# for file in get_csv_History(csv_filedir):
-#     print(file)
-#     output_csv('./datafiles/' + file)
-
-# for file in path:
-#     if file:
-#         myfile = 'datafiles/myfile1.csv'
-#         read_csv(myfile)
-
-
-
-
-
-
-                
-            
-
+        output_csv('./datafiles/'+ filename,filename)
