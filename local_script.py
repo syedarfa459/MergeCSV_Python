@@ -53,9 +53,9 @@ def output_csv(filepath,filename):
                             counter += 1
     print('Done!!')
     if count != 0:
-        print("Total rows of file History_Performance_FTRMTR_BI_New_Counters inserted", count)
+        print(f"Total rows of file {filename} inserted", count)
     if counter != 0:
-        print("Total rows of HOST03_pmresult_AJKNewCountersFileHuaweiBI inserted", counter)
+        print(f"Total rows of file {filename} inserted", counter)
 
 def get_csv(csvdir):
     csvlist = []
